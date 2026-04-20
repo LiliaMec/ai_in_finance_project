@@ -1,6 +1,4 @@
-# Project Title
-
-⚠️ Replace this title with the **name of your project**
+# Credit-Risk Modelling with Default of Credit Card Clients
 
 ---
 

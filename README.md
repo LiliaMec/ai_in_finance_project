@@ -49,14 +49,18 @@ Précision (classe 1) : fiabilité des prédictions de défaut
 
 Vue d'ensemble
 Le dataset utilisé est le UCI Default of Credit Card Clients, disponible sur : https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients . Il contient 30 000 observations et 24 variables au total, dont 23 variables explicatives et 1 variable cible. Les données ont été collectées auprès de clients de cartes de crédit d'une banque taïwanaise sur la période avril–septembre 2005. La variable cible est default_payment_next_month, qui vaut 1 si le client fait défaut le mois suivant, et 0 sinon.
+
 Description des Variables
 Les variables sont organisées en trois grandes familles. Le profil client regroupe LIMIT_BAL (limite de crédit, numérique), SEX (sexe, catégorielle), EDUCATION (niveau d'éducation, ordinale de 1 à 4), MARRIAGE (statut marital, catégorielle) et AGE (âge en années, numérique). L'historique de paiement est capturé par les variables PAY_0 à PAY_6, qui représentent le statut de remboursement mensuel de septembre à avril 2005, codé de -2 (avance sur paiement) à 9 (retard de 9 mois ou plus) — ce sont des variables ordinales. Enfin, les données financières comprennent BILL_AMT1 à BILL_AMT6 (montants facturés chaque mois, numériques) et PAY_AMT1 à PAY_AMT6 (montants effectivement payés chaque mois, numériques).
+
 Variable Cible
 La variable cible est default_payment_next_month. Elle indique si le client n'a pas effectué son paiement minimum lors du mois suivant la période d'observation. C'est une variable binaire : elle vaut 0 si le client a payé (pas de défaut) et 1 si le client n'a pas payé (défaut).
 Types de Variables
 Le dataset contient principalement des variables numériques continues (LIMIT_BAL, AGE, BILL_AMT1–6, PAY_AMT1–6), des variables ordinales (EDUCATION, MARRIAGE, PAY_0 à PAY_6) et des variables catégorielles nominales (SEX). La variable cible est binaire.
+
 Distribution des Données
 Le dataset présente un déséquilibre de classes marqué : 78 % des clients n'ont pas fait défaut contre 22 % qui ont fait défaut. Un modèle naïf prédisant toujours 0 atteindrait 78 % d'accuracy sans détecter un seul défaut, ce qui illustre pourquoi l'accuracy seule est une métrique trompeuse ici. Parmi les signaux prédictifs clés, PAY_0 affiche des taux de défaut allant de ~13 % pour les clients à jour à plus de 50 % pour ceux en retard sévère, et LIMIT_BAL est inversement corrélé au risque. Plusieurs variables BILL_AMT sont fortement corrélées entre elles, ce qui a motivé l'étape de sélection de variables.
+
 Qualité des Données
 Aucune valeur manquante n'a été détectée dans le dataset. En revanche, des valeurs de catégories non documentées ont été identifiées dans EDUCATION (valeurs 0, 5, 6) et MARRIAGE (valeur 0), non décrites dans la documentation officielle — elles ont été regroupées dans la catégorie "autre". Le déséquilibre de classes (78/22) constitue le principal défi structurel et a été traité via des stratégies spécifiques à chaque modèle. Une forte corrélation inter-variables entre BILL_AMT1 et BILL_AMT6 a également été observée, justifiant la sélection de variables en amont. Aucun doublon n'a été détecté.
 
